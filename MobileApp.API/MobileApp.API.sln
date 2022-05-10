@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nadas.API.Entities", "Nadas.API.Entities\Nadas.API.Entities.csproj", "{C87CED5A-25F1-4AC9-8992-36958B4DE8A1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nadas.API.DataAccess", "Nadas.API.DataAccess\Nadas.API.DataAccess.csproj", "{26CCC4FC-AE51-4D47-8E67-C4E433735D75}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nadas.API.Business", "Nadas.API.Business\Nadas.API.Business.csproj", "{12CC89A7-782D-4870-B20A-D3595CF328BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nadas.API.Domain", "Nadas.API.Domain\Nadas.API.Domain.csproj", "{B72140A6-B0C8-4634-A395-4EF1D8B44E45}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nadas.API", "Nadas.API\Nadas.API.csproj", "{D66CFD90-DFD6-4036-8C89-0BDDB353253B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nadas.DTO", "Nadas.DTO\Nadas.DTO.csproj", "{4C829319-46CC-4895-843F-65E861C36F24}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C87CED5A-25F1-4AC9-8992-36958B4DE8A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C87CED5A-25F1-4AC9-8992-36958B4DE8A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C87CED5A-25F1-4AC9-8992-36958B4DE8A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C87CED5A-25F1-4AC9-8992-36958B4DE8A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26CCC4FC-AE51-4D47-8E67-C4E433735D75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26CCC4FC-AE51-4D47-8E67-C4E433735D75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26CCC4FC-AE51-4D47-8E67-C4E433735D75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26CCC4FC-AE51-4D47-8E67-C4E433735D75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12CC89A7-782D-4870-B20A-D3595CF328BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12CC89A7-782D-4870-B20A-D3595CF328BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12CC89A7-782D-4870-B20A-D3595CF328BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12CC89A7-782D-4870-B20A-D3595CF328BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B72140A6-B0C8-4634-A395-4EF1D8B44E45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B72140A6-B0C8-4634-A395-4EF1D8B44E45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B72140A6-B0C8-4634-A395-4EF1D8B44E45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B72140A6-B0C8-4634-A395-4EF1D8B44E45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D66CFD90-DFD6-4036-8C89-0BDDB353253B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D66CFD90-DFD6-4036-8C89-0BDDB353253B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D66CFD90-DFD6-4036-8C89-0BDDB353253B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D66CFD90-DFD6-4036-8C89-0BDDB353253B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C829319-46CC-4895-843F-65E861C36F24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C829319-46CC-4895-843F-65E861C36F24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C829319-46CC-4895-843F-65E861C36F24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C829319-46CC-4895-843F-65E861C36F24}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8D1025DD-ADD7-483D-8171-46C0397FE748}
+	EndGlobalSection
+EndGlobal
