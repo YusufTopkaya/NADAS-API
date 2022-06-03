@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nadas.API.Domain", "Nadas.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nadas.API", "Nadas.API\Nadas.API.csproj", "{D66CFD90-DFD6-4036-8C89-0BDDB353253B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nadas.DTO", "Nadas.DTO\Nadas.DTO.csproj", "{4C829319-46CC-4895-843F-65E861C36F24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nadas.API.DTO", "Nadas.DTO\Nadas.API.DTO.csproj", "{4C829319-46CC-4895-843F-65E861C36F24}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{BEE8B82B-973F-41FF-882C-CF1AA79AF4A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{4C829319-46CC-4895-843F-65E861C36F24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C829319-46CC-4895-843F-65E861C36F24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C829319-46CC-4895-843F-65E861C36F24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEE8B82B-973F-41FF-882C-CF1AA79AF4A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEE8B82B-973F-41FF-882C-CF1AA79AF4A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEE8B82B-973F-41FF-882C-CF1AA79AF4A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEE8B82B-973F-41FF-882C-CF1AA79AF4A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

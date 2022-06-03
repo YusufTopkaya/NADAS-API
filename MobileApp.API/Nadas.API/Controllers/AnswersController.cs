@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nadas.API.Business.Interfaces;
 using Nadas.API.Entities.Concrete;

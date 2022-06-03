@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <UserSecretsId>f0721557-da92-44ab-9b5a-9b7cc1a1f829</UserSecretsId>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,7 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Nadas.API.Business\Nadas.API.Business.csproj" />
-    <ProjectReference Include="..\Nadas.DTO\Nadas.DTO.csproj" />
+    <ProjectReference Include="..\Nadas.DTO\Nadas.API.DTO.csproj" />
   </ItemGroup>
 
   <ItemGroup>

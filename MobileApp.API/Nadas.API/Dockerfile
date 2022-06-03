@@ -7,6 +7,11 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["Nadas.API/Nadas.API.csproj", "Nadas.API/"]
+COPY ["Nadas.DTO/Nadas.API.DTO.csproj", "Nadas.DTO/"]
+COPY ["Nadas.API.Entities/Nadas.API.Entities.csproj", "Nadas.API.Entities/"]
+COPY ["Nadas.API.Domain/Nadas.API.Domain.csproj", "Nadas.API.Domain/"]
+COPY ["Nadas.API.Business/Nadas.API.Business.csproj", "Nadas.API.Business/"]
+COPY ["Nadas.API.DataAccess/Nadas.API.DataAccess.csproj", "Nadas.API.DataAccess/"]
 RUN dotnet restore "Nadas.API/Nadas.API.csproj"
 COPY . .
 WORKDIR "/src/Nadas.API"

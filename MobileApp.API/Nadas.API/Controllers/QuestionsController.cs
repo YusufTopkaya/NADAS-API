@@ -26,7 +26,14 @@ namespace Nadas.API.Controllers
             var questions = await _questionService.GetAllLoadedAsync();
             return Ok(_mapper.Map<List<QuestionListDto>>(questions).OrderByDescending(I=> I.Id));
         }
-
+        [HttpGet]
+        [Route("QuestionCount")]
+        public async Task<IActionResult> QuestionCount()
+        {
+            var questions = await _questionService.GetAllLoadedAsync();
+            int count = _mapper.Map<List<QuestionListDto>>(questions).OrderByDescending(I => I.Id).Count();
+            return Ok(count);
+        }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {

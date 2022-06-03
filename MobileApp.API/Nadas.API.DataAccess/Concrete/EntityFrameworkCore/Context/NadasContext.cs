@@ -8,7 +8,8 @@ namespace Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=(localdb)\\MSSQLLocalDB; database=NadasDB; Integrated Security=true;");
+           // optionsBuilder.UseSqlServer("server=(localdb)\\MSSQLLocalDB; database=NadasDB; Integrated Security=true;");
+            optionsBuilder.UseSqlServer(@"Data Source=host.docker.internal,1433;Initial Catalog=NadasDB;User ID=sa;Password=root#nadas.N");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
