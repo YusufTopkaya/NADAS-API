@@ -7,9 +7,12 @@ namespace Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Repositories
 {
     public class EfQuestionRepository : EfGenericRepository<Question>, IQuestionDal
     {
+        public EfQuestionRepository(NadasContext context) : base(context)
+        {
+        }
+
         public async Task<List<Question>> GetAllLoadedAsync()
         {
-            using var context = new NadasContext();
             return await context.Questions
                 .Include(I => I.Answers)
                 .Include(I => I.Content)

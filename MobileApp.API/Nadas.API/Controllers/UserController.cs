@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Nadas.API.Business.Interfaces;
 using Nadas.API.Entities.Concrete;
@@ -35,7 +36,9 @@ namespace Nadas.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(UserAddDto user)
         {
-            User registeredUser = await _userService.AddAsync(_mapper.Map<User>(user));
+            User registeredUser = await _userService.RegisterAsync(_mapper.Map<User>(user));
+            if (registeredUser == null)
+                return BadRequest();
             return Created("", registeredUser);
         }
 

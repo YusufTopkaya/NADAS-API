@@ -1,6 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Nadas.API.Business.Concrete;
 using Nadas.API.Business.Interfaces;
+using Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Context;
 using Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Repositories;
 using Nadas.API.DataAccess.Interfaces;
 
@@ -8,8 +11,14 @@ namespace Nadas.API.Business.Containers.MicrosoftIoC
 {
     public static class CustomIoCExtension
     {
-        public static void AddDependencies(this IServiceCollection services)
+        public static void AddDependencies(this IServiceCollection services,IConfiguration configuration)
         {
+            services.AddDbContext<NadasContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("LocalDb"), opt =>
+                    opt.MigrationsAssembly("Nadas.API")
+                )
+            );
+
             services.AddScoped(typeof(IGenericDal<>),typeof(EfGenericRepository<>));
             services.AddScoped(typeof(IGenericService<>),typeof(GenericManager<>));
 

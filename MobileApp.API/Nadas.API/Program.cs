@@ -1,10 +1,12 @@
+using Microsoft.EntityFrameworkCore;
 using Nadas.API.Business.Containers.MicrosoftIoC;
+using Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddDependencies();
+builder.Services.AddDependencies(builder.Configuration);
 builder.Services.AddCors(cors =>
 {
     cors.AddPolicy("LocalHost",policy =>
@@ -19,6 +21,7 @@ builder.Services.AddSwaggerGen();
 
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Context;
 
@@ -11,9 +12,10 @@ using Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Context;
 namespace Nadas.API.DataAccess.Migrations
 {
     [DbContext(typeof(NadasContext))]
-    partial class NadasContextModelSnapshot : ModelSnapshot
+    [Migration("20221006130814_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
