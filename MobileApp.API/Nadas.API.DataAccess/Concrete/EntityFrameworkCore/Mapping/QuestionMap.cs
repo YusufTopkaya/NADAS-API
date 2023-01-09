@@ -15,13 +15,22 @@ namespace Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Mapping
             builder.Property(I => I.Rate).HasDefaultValue(0);
             builder.Property(I => I.ViewCount).HasDefaultValue(0);
 
-            builder.Property(I => I.CreationDate).HasDefaultValue(DateTime.UtcNow);
-            builder.Property(I => I.UpdateDate).HasDefaultValue(DateTime.UtcNow);
+            builder.Property(I => I.CreationDate).HasDefaultValueSql("GETDATE()");
+            builder.Property(I => I.UpdateDate).HasDefaultValueSql("GETDATE()");
             builder.Property(I => I.ViewCount).HasDefaultValue(0);
             builder.Property(I => I.IsDeleted).HasDefaultValue(false);
 
 
             builder.HasMany(I => I.Tags).WithMany(I => I.Questions);
+
+            builder
+                .HasMany(x=>x.Answers)
+                .WithOne(x=>x.Question)
+                .HasForeignKey(x=>x.QuestionId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+
+
         }
     }
 }

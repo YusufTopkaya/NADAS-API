@@ -15,7 +15,6 @@ namespace Nadas.API.Mapping.AutoMapperProfile
             CreateMap<UserListDto, User>().ReverseMap();
             CreateMap<UserAddDto, User>().ReverseMap();
             CreateMap<UserUpdateDto, User>().ReverseMap();
-            CreateMap<UserLoginDto, User>().ReverseMap();
 
             CreateMap<QuestionListDto, Question>().ReverseMap();
             CreateMap<QuestionAddDto, Question>().ReverseMap();

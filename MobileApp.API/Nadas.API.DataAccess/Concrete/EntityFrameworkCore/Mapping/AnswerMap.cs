@@ -11,11 +11,13 @@ namespace Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Mapping
             builder.HasKey(I => I.Id);
             builder.Property(I => I.Id).UseIdentityColumn();
 
-            builder.Property(I => I.CreationDate).HasDefaultValue(DateTime.UtcNow);
-            builder.Property(I => I.UpdateDate).HasDefaultValue(DateTime.UtcNow);
+            builder.Property(I => I.CreationDate).HasDefaultValueSql("GETDATE()");
+            builder.Property(I => I.UpdateDate).HasDefaultValueSql("GETDATE()");
             builder.Property(I => I.IsDeleted).HasDefaultValue(false);
 
             builder.Property(I => I.IsVerified).HasDefaultValue(false);
+
+            
         }
     }
 }

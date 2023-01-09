@@ -9,17 +9,17 @@ using Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Context;
 
 #nullable disable
 
-namespace Nadas.API.DataAccess.Migrations
+namespace Nadas.API.Migrations
 {
     [DbContext(typeof(NadasContext))]
-    [Migration("20220509132532_initial")]
-    partial class initial
+    [Migration("20230108140922_mig1")]
+    partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.4")
+                .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -41,23 +41,25 @@ namespace Nadas.API.DataAccess.Migrations
                     b.Property<DateTime?>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 5, 9, 13, 25, 32, 550, DateTimeKind.Utc).AddTicks(1408));
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<bool?>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsVerified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<int?>("QuestionId")
+                    b.Property<bool?>("IsVerified")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 5, 9, 13, 25, 32, 550, DateTimeKind.Utc).AddTicks(1599));
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<int?>("UpdatedUserId")
                         .HasColumnType("int");
@@ -90,13 +92,12 @@ namespace Nadas.API.DataAccess.Migrations
                     b.Property<DateTime?>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 5, 9, 13, 25, 32, 550, DateTimeKind.Utc).AddTicks(2209));
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<bool?>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Text")
                         .HasColumnType("nvarchar(max)");
@@ -104,7 +105,7 @@ namespace Nadas.API.DataAccess.Migrations
                     b.Property<DateTime?>("UpdateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 5, 9, 13, 25, 32, 550, DateTimeKind.Utc).AddTicks(2371));
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<int?>("UpdatedUserId")
                         .HasColumnType("int");
@@ -131,10 +132,12 @@ namespace Nadas.API.DataAccess.Migrations
                     b.Property<DateTime?>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 5, 9, 13, 25, 32, 550, DateTimeKind.Utc).AddTicks(9884));
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<bool?>("IsDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<int?>("Rate")
                         .ValueGeneratedOnAdd()
@@ -149,12 +152,12 @@ namespace Nadas.API.DataAccess.Migrations
                     b.Property<DateTime?>("UpdateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 5, 9, 13, 25, 32, 551, DateTimeKind.Utc).AddTicks(45));
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<int?>("UpdatedUserId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ViewCount")
@@ -163,6 +166,8 @@ namespace Nadas.API.DataAccess.Migrations
                         .HasDefaultValue(0);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ContentId");
 
                     b.HasIndex("UserId");
 
@@ -183,10 +188,12 @@ namespace Nadas.API.DataAccess.Migrations
                     b.Property<DateTime?>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 5, 9, 13, 25, 32, 551, DateTimeKind.Utc).AddTicks(881));
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<bool?>("IsDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -194,7 +201,7 @@ namespace Nadas.API.DataAccess.Migrations
                     b.Property<DateTime?>("UpdateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 5, 9, 13, 25, 32, 551, DateTimeKind.Utc).AddTicks(1054));
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<int?>("UpdatedUserId")
                         .HasColumnType("int");
@@ -212,34 +219,36 @@ namespace Nadas.API.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AuthLevel")
+                    b.Property<int?>("AuthLevel")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
                     b.Property<int?>("CreatedUserId")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<DateTime?>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 5, 9, 13, 25, 32, 551, DateTimeKind.Utc).AddTicks(1516));
+                        .HasDefaultValueSql("GETDATE()");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("FireBaseId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("IsDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
-                    b.Property<bool>("IsVerified")
+                    b.Property<bool?>("IsVerified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surname")
@@ -248,13 +257,12 @@ namespace Nadas.API.DataAccess.Migrations
                     b.Property<DateTime?>("UpdateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 5, 9, 13, 25, 32, 551, DateTimeKind.Utc).AddTicks(1666));
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<int?>("UpdatedUserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.HasKey("Id");
 
@@ -284,17 +292,21 @@ namespace Nadas.API.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Nadas.API.Entities.Concrete.Question", null)
+                    b.HasOne("Nadas.API.Entities.Concrete.Question", "Question")
                         .WithMany("Answers")
-                        .HasForeignKey("QuestionId");
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("Nadas.API.Entities.Concrete.User", "User")
-                        .WithMany()
+                        .WithMany("Answers")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Content");
+
+                    b.Navigation("Question");
 
                     b.Navigation("User");
                 });
@@ -302,14 +314,14 @@ namespace Nadas.API.DataAccess.Migrations
             modelBuilder.Entity("Nadas.API.Entities.Concrete.Question", b =>
                 {
                     b.HasOne("Nadas.API.Entities.Concrete.Content", "Content")
-                        .WithOne("Question")
-                        .HasForeignKey("Nadas.API.Entities.Concrete.Question", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("ContentId");
 
                     b.HasOne("Nadas.API.Entities.Concrete.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                        .WithMany("Questions")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Content");
 
@@ -331,15 +343,16 @@ namespace Nadas.API.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Nadas.API.Entities.Concrete.Content", b =>
-                {
-                    b.Navigation("Question")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Nadas.API.Entities.Concrete.Question", b =>
                 {
                     b.Navigation("Answers");
+                });
+
+            modelBuilder.Entity("Nadas.API.Entities.Concrete.User", b =>
+                {
+                    b.Navigation("Answers");
+
+                    b.Navigation("Questions");
                 });
 #pragma warning restore 612, 618
         }

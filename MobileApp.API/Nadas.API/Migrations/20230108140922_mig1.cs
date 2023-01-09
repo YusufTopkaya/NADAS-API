@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Nadas.API.DataAccess.Migrations
+namespace Nadas.API.Migrations
 {
-    public partial class initial : Migration
+    public partial class mig1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,12 +16,11 @@ namespace Nadas.API.DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    QuestionId = table.Column<int>(type: "int", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValue: new DateTime(2022, 5, 9, 13, 25, 32, 550, DateTimeKind.Utc).AddTicks(2209)),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "GETDATE()"),
                     CreatedUserId = table.Column<int>(type: "int", nullable: true),
-                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValue: new DateTime(2022, 5, 9, 13, 25, 32, 550, DateTimeKind.Utc).AddTicks(2371)),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "GETDATE()"),
                     UpdatedUserId = table.Column<int>(type: "int", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -35,11 +34,11 @@ namespace Nadas.API.DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValue: new DateTime(2022, 5, 9, 13, 25, 32, 551, DateTimeKind.Utc).AddTicks(881)),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "GETDATE()"),
                     CreatedUserId = table.Column<int>(type: "int", nullable: true),
-                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValue: new DateTime(2022, 5, 9, 13, 25, 32, 551, DateTimeKind.Utc).AddTicks(1054)),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "GETDATE()"),
                     UpdatedUserId = table.Column<int>(type: "int", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -52,18 +51,16 @@ namespace Nadas.API.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    FireBaseId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsVerified = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    AuthLevel = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValue: new DateTime(2022, 5, 9, 13, 25, 32, 551, DateTimeKind.Utc).AddTicks(1516)),
-                    CreatedUserId = table.Column<int>(type: "int", nullable: true),
-                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValue: new DateTime(2022, 5, 9, 13, 25, 32, 551, DateTimeKind.Utc).AddTicks(1666)),
-                    UpdatedUserId = table.Column<int>(type: "int", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
+                    IsVerified = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    AuthLevel = table.Column<int>(type: "int", nullable: true, defaultValue: 0),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "GETDATE()"),
+                    CreatedUserId = table.Column<int>(type: "int", nullable: true, defaultValue: 0),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "GETDATE()"),
+                    UpdatedUserId = table.Column<int>(type: "int", nullable: true, defaultValue: 0),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -80,19 +77,19 @@ namespace Nadas.API.DataAccess.Migrations
                     ViewCount = table.Column<int>(type: "int", nullable: true, defaultValue: 0),
                     Rate = table.Column<int>(type: "int", nullable: true, defaultValue: 0),
                     ContentId = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValue: new DateTime(2022, 5, 9, 13, 25, 32, 550, DateTimeKind.Utc).AddTicks(9884)),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "GETDATE()"),
                     CreatedUserId = table.Column<int>(type: "int", nullable: true),
-                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValue: new DateTime(2022, 5, 9, 13, 25, 32, 551, DateTimeKind.Utc).AddTicks(45)),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "GETDATE()"),
                     UpdatedUserId = table.Column<int>(type: "int", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true, defaultValue: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Questions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Questions_Contents_Id",
-                        column: x => x.Id,
+                        name: "FK_Questions_Contents_ContentId",
+                        column: x => x.ContentId,
                         principalTable: "Contents",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -108,15 +105,15 @@ namespace Nadas.API.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IsVerified = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    IsVerified = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    QuestionId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     ContentId = table.Column<int>(type: "int", nullable: false),
-                    QuestionId = table.Column<int>(type: "int", nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValue: new DateTime(2022, 5, 9, 13, 25, 32, 550, DateTimeKind.Utc).AddTicks(1408)),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "GETDATE()"),
                     CreatedUserId = table.Column<int>(type: "int", nullable: true),
-                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValue: new DateTime(2022, 5, 9, 13, 25, 32, 550, DateTimeKind.Utc).AddTicks(1599)),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "GETDATE()"),
                     UpdatedUserId = table.Column<int>(type: "int", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -136,8 +133,7 @@ namespace Nadas.API.DataAccess.Migrations
                         name: "FK_Answers_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -178,6 +174,11 @@ namespace Nadas.API.DataAccess.Migrations
                 name: "IX_Answers_UserId",
                 table: "Answers",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Questions_ContentId",
+                table: "Questions",
+                column: "ContentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Questions_UserId",

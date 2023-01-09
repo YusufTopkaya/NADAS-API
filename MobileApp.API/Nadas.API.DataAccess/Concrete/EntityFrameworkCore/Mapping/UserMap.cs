@@ -19,10 +19,22 @@ namespace Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Mapping
             //builder.Property(I => I.Email).HasMaxLength(150).IsRequired();
             //builder.Property(I => I.Password).HasMaxLength(150).IsRequired();
 
-            builder.Property(I => I.CreationDate).HasDefaultValue(DateTime.UtcNow);
-            builder.Property(I => I.UpdateDate).HasDefaultValue(DateTime.UtcNow);
+            builder.Property(I => I.CreationDate).HasDefaultValueSql("GETDATE()");
+            builder.Property(I => I.UpdateDate).HasDefaultValueSql("GETDATE()");
             builder.Property(I => I.IsVerified).HasDefaultValue(false);
             builder.Property(I => I.AuthLevel).HasDefaultValue(0);
+
+            builder
+                .HasMany(x => x.Answers)
+                .WithOne(x => x.User)
+                .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder
+               .HasMany(x => x.Questions)
+               .WithOne(x => x.User)
+               .HasForeignKey(x => x.UserId)
+               .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

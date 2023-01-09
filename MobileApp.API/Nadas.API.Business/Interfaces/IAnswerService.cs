@@ -6,5 +6,6 @@ namespace Nadas.API.Business.Interfaces
     {
         Task<List<Answer>> GetAllLoadedAsync();
         Task<List<Answer>> GetAllByQuestionIdAsync(int id);
+        Task AddAnswerAsync(Answer answer);
     }
 }

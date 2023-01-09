@@ -42,14 +42,6 @@ namespace Nadas.API.Controllers
             return Created("", registeredUser);
         }
 
-        [HttpPost]
-        [Route("login")]
-        public async Task<IActionResult> Login(UserLoginDto user)
-        {
-            User loggedUser = await _userService.LoginAsync(_mapper.Map<User>(user));
-            return Created("", loggedUser);
-        }
-
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, UserUpdateDto user)
         {
