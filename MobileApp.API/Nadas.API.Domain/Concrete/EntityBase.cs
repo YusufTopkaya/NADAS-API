@@ -7,6 +7,6 @@
         public int? CreatedUserId { get; set; }
         public DateTime? UpdateDate { get; set; }
         public int? UpdatedUserId { get; set; }
-        public bool? IsDeleted { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

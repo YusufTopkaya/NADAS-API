@@ -21,19 +21,22 @@ namespace Nadas.API.Business.Concrete
             _questionManager = questionManager;
         }
 
-        public async Task AddAnswerAsync(Answer answer)
+        public async Task<Answer> AddAnswerAsync(Answer answer)
         {
             await _answerDal.AddAsync(answer);
             var sender =await _userManager.FindById(answer.UserId);
+            answer.User = sender;
             Question question = await _questionManager.FindById(answer.QuestionId);
             var recipient =await _userManager.FindById(question.UserId);
-            var title = question.Title + " sorunuza yeni bir cevap aldınız.";
+            var questionText = question.Title.Length > 50 ? question.Title.Substring(0,50) + "..." : question.Title;
+            var title = "\""+ questionText+ "\" sorunuza yeni bir cevap aldınız.";
             var message = sender.Name + " " + sender.Surname + ": " + answer.Content.Text;
             if (sender.Id != recipient.Id)
             {
                 NotificationCreateDto notificationCreateDto = new() { Sender = sender, Recipient = recipient, Title = title, Message = message};
                 _notificationManager.NotifyUser(notificationCreateDto);
             }
+            return answer;
             
         }
 

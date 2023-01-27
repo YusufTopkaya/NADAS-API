@@ -13,6 +13,10 @@ namespace Nadas.API.Business.Concrete
             _questionDal = requestionDal;
         }
 
+        public override Task<List<Question>> GetAllAsync()
+        {
+            return _questionDal.GetAllAsync();
+        }
         public async Task<List<Question>> GetAllLoadedAsync()
         {
             return await _questionDal.GetAllLoadedAsync();

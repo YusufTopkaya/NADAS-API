@@ -1,9 +1,10 @@
-﻿using Nadas.API.Entities.Interfaces;
+﻿using Nadas.API.Domain.Concrete;
+using Nadas.API.Entities.Interfaces;
 using System.Linq.Expressions;
 
 namespace Nadas.API.DataAccess.Interfaces
 {
-    public interface IGenericDal<TEntity> where TEntity : class, IEntity, new()
+    public interface IGenericDal<TEntity> where TEntity : EntityBase, new()
     {
         Task<List<TEntity>> GetAllAsync();
         Task<List<TEntity>> GetAllAsync<TKey>(Expression<Func<TEntity, TKey>> keySelector);

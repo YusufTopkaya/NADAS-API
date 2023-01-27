@@ -39,9 +39,11 @@ namespace Nadas.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(AnswerAddDto answer)
         {
+           
             //await _answerService.AddAsync(_mapper.Map<Answer>(answer));
-            await _answerService.AddAnswerAsync(_mapper.Map<Answer>(answer));
-            return Created("", answer);
+            var created= await _answerService.AddAnswerAsync(_mapper.Map<Answer>(answer));
+            var model = _mapper.Map<AnswerListDto>(created);
+            return Created(string.Empty, model);
         }
 
         [HttpPut("{id}")]

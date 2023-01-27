@@ -14,6 +14,7 @@ namespace Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Repositories
         public async Task<List<Answer>> GetAllLoadedAsync()
         {
             return await context.Answers
+                .Where(x=>!x.IsDeleted)
                 .Include(I => I.Question)
                 .Include(I => I.Content)
                 .Include(I => I.User)
@@ -22,6 +23,7 @@ namespace Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Repositories
         public async Task<List<Answer>> GetAllByQuestionIdAsync(int id)
         {
             return await context.Answers
+                .Where(x => !x.IsDeleted)
                 .Include(I => I.Question)
                 .Include(I => I.Content)
                 .Include(I => I.User)

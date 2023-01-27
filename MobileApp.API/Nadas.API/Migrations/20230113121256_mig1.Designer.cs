@@ -12,7 +12,7 @@ using Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Context;
 namespace Nadas.API.Migrations
 {
     [DbContext(typeof(NadasContext))]
-    [Migration("20230108140922_mig1")]
+    [Migration("20230113121256_mig1")]
     partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -301,7 +301,7 @@ namespace Nadas.API.Migrations
                     b.HasOne("Nadas.API.Entities.Concrete.User", "User")
                         .WithMany("Answers")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Content");
@@ -320,7 +320,7 @@ namespace Nadas.API.Migrations
                     b.HasOne("Nadas.API.Entities.Concrete.User", "User")
                         .WithMany("Questions")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Content");

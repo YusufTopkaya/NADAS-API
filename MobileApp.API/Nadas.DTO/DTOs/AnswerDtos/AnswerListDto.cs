@@ -1,6 +1,7 @@
 ﻿using Nadas.API.Entities.Concrete;
 using Nadas.DTO.DTOs.ContentDtos;
 using Nadas.DTO.DTOs.QuestionDtos;
+using Nadas.DTO.DTOs.UserDtos;
 using Nadas.DTO.Interfaces;
 
 namespace Nadas.DTO.DTOs.AnswerDtos
@@ -10,9 +11,9 @@ namespace Nadas.DTO.DTOs.AnswerDtos
         public int Id { get; set; }
         public bool IsVerified { get; set; }
         public int UserId { get; set; }
-        //public User User { get; set; }
+        public UserListDto User { get; set; }
         public int QuestionId { get; set; }
-       // public QuestionListDto Question { get; set; }
         public ContentListDto Content { get; set; }
+        public DateTime? CreationDate { get; set; }
     }
 }

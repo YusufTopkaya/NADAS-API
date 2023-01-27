@@ -28,13 +28,13 @@ namespace Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Mapping
                 .HasMany(x => x.Answers)
                 .WithOne(x => x.User)
                 .HasForeignKey(x => x.UserId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder
                .HasMany(x => x.Questions)
                .WithOne(x => x.User)
                .HasForeignKey(x => x.UserId)
-               .OnDelete(DeleteBehavior.NoAction);
+               .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

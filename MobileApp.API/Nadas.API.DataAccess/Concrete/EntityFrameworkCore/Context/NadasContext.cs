@@ -13,11 +13,12 @@ namespace Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new AnswerMap());
-            modelBuilder.ApplyConfiguration(new ContentMap());
-            modelBuilder.ApplyConfiguration(new QuestionMap());
-            modelBuilder.ApplyConfiguration(new TagMap());
-            modelBuilder.ApplyConfiguration(new UserMap());
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(NadasContext).Assembly);
+        }
+        public override int SaveChanges()
+        {
+            Extensions.ChangeTrackerExtensions.SetAuditProperties(ChangeTracker);
+            return base.SaveChanges();
         }
 
         public DbSet<Answer> Answers { get; set; }
@@ -25,5 +26,7 @@ namespace Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Context
         public DbSet<Question> Questions { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
+
     }
 }

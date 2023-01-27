@@ -1,9 +1,10 @@
-﻿using Nadas.API.Entities.Interfaces;
+﻿using Nadas.API.Domain.Concrete;
+using Nadas.API.Entities.Interfaces;
 using System.Linq.Expressions;
 
 namespace Nadas.API.Business.Interfaces
 {
-    public interface IGenericService<TEntity> where TEntity : class, IEntity, new()
+    public interface IGenericService<TEntity> where TEntity : EntityBase, new()
     {
         Task<List<TEntity>> GetAllAsync();
         Task<TEntity> FindById(int id);

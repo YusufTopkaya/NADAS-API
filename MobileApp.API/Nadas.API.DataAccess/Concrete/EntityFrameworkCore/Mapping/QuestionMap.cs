@@ -21,7 +21,8 @@ namespace Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Mapping
             builder.Property(I => I.IsDeleted).HasDefaultValue(false);
 
 
-            builder.HasMany(I => I.Tags).WithMany(I => I.Questions);
+            builder.HasMany(I => I.Tags)
+                .WithMany(I => I.Questions);
 
             builder
                 .HasMany(x=>x.Answers)

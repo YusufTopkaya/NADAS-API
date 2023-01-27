@@ -1,8 +1,13 @@
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using Nadas.API.Business.Concrete;
 using Nadas.API.Business.Containers.MicrosoftIoC;
+using Nadas.API.Business.ExtensionMethods;
 using Nadas.API.Business.Interfaces;
 using Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Context;
+using Serilog;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using TechBuddy.Middlewares.RequestResponse;
 
@@ -13,6 +18,7 @@ builder.Host.ConfigureAppConfiguration(conf =>
     conf.AddJsonFile("Configurations/secrets.json",false);
 });
 
+builder.Host.AddCustomSerilog("Nadas");
 // Add services to the container.
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDependencies(builder.Configuration);
@@ -23,25 +29,28 @@ builder.Services.AddCors(cors =>
         policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
     });
 });
-builder.Services.AddControllers().AddJsonOptions(opt =>
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddControllersWithViews().AddJsonOptions(opt =>
 {
     opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    opt.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<IFirestoreService, FirestoreManager>();
-builder.Services.AddTransient<INotificationService, NotificationManager>();
+builder.Services.AddHealthChecks().AddDbContextCheck<NadasContext>();
+builder.Services.AddHealthChecksUI().AddInMemoryStorage();
+builder.Services.AddCoreAdmin();
 
 var app = builder.Build();
 
+var dbContext = app.Services.GetRequiredService<NadasContext>();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+dbContext.Database.Migrate();
+
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.AddTBRequestResponseMiddleware(opt =>
 {
@@ -55,15 +64,28 @@ app.AddTBRequestResponseMiddleware(opt =>
 
 app.Use((context,next) =>
 {
-    Console.WriteLine(new String('-',100));
-    Console.WriteLine(DateTime.Now.ToString());
-    Console.WriteLine(new String('-', 100));
+    Log.Information(new String('-',100));
+    Log.Information(DateTime.Now.ToString());
+    Log.Information(new String('-', 100));
     return next();
 });
 
+//app.UseHealthChecks("/health");
+app.MapHealthChecks("/health", new HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
+app.MapHealthChecksUI();
+app.UseStaticFiles();
+
+app.UseRouting();
 app.UseCors("LocalHost");
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseEndpoints(ep =>
+{
+    ep.MapControllers();
+    ep.MapDefaultControllerRoute();
+});
 
 app.Run();

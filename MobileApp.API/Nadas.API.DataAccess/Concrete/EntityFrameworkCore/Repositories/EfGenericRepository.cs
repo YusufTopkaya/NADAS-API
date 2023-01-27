@@ -1,13 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Context;
 using Nadas.API.DataAccess.Interfaces;
+using Nadas.API.Domain.Concrete;
 using Nadas.API.Entities.Interfaces;
 using System.Linq.Expressions;
 
 namespace Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Repositories
 {
     public class EfGenericRepository<TEntity> : IGenericDal<TEntity>,IDisposable
-        where TEntity : class, IEntity, new()
+        where TEntity : EntityBase, new()
     {
         protected readonly NadasContext context;
 
@@ -29,9 +30,9 @@ namespace Nadas.API.DataAccess.Concrete.EntityFrameworkCore.Repositories
             return await context.FindAsync<TEntity>(id);
         }
 
-        public async Task<List<TEntity>> GetAllAsync()
+        public virtual async Task<List<TEntity>> GetAllAsync()
         {
-            return await context.Set<TEntity>().ToListAsync();
+            return await context.Set<TEntity>().Where(x=>!x.IsDeleted).ToListAsync();
         }
 
         public async Task<List<TEntity>> GetAllAsync<TKey>(Expression<Func<TEntity,TKey>> keySelector)
